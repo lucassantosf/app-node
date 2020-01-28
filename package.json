@@ -1,19 +1,31 @@
 {
   "name": "node-app",
   "version": "1.0.0",
-  "description": "",
   "main": "index.js",
   "scripts": {
-    "start":"nodemon src/index.js"
+    "dev": "babel ./main.js -o ./bundle.js -w",
+    "start": "nodemon src/index.js"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@babel/cli": "^7.8.3",
+    "@babel/core": "^7.8.3",
+    "@babel/preset-env": "^7.8.3",
     "express": "^4.17.1",
     "mongoose": "^5.8.7"
   },
   "devDependencies": {
     "nodemon": "^2.0.2"
-  }
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/lucassantosf/app-node.git"
+  },
+  "bugs": {
+    "url": "https://github.com/lucassantosf/app-node/issues"
+  },
+  "homepage": "https://github.com/lucassantosf/app-node#readme",
+  "description": ""
 }
