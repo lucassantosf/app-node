@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "dev": "babel ./main.js -o ./bundle.js -w",
+    "dev": "babel ./desafio.js -o ./bundle.js -w",
     "start": "nodemon src/index.js"
   },
   "keywords": [],
@@ -12,6 +12,7 @@
   "dependencies": {
     "@babel/cli": "^7.8.3",
     "@babel/core": "^7.8.3",
+    "@babel/plugin-proposal-object-rest-spread": "^7.8.3",
     "@babel/preset-env": "^7.8.3",
     "express": "^4.17.1",
     "mongoose": "^5.8.7"
