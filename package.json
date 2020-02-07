@@ -3,22 +3,19 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "dev": "babel ./desafio.js -o ./bundle.js -w",
+    "dev": "webpack --mode=development -w",
     "start": "nodemon src/index.js"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
-  "dependencies": {
-    "@babel/cli": "^7.8.3",
-    "@babel/core": "^7.8.3",
-    "@babel/plugin-proposal-object-rest-spread": "^7.8.3",
-    "@babel/preset-env": "^7.8.3",
-    "express": "^4.17.1",
-    "mongoose": "^5.8.7"
-  },
   "devDependencies": {
-    "nodemon": "^2.0.2"
+    "@babel/core": "^7.8.4",
+    "@babel/preset-env": "^7.8.4",
+    "babel-loader": "^8.0.6",
+    "nodemon": "^2.0.2",
+    "webpack": "^4.41.5",
+    "webpack-cli": "^3.3.10"
   },
   "repository": {
     "type": "git",
@@ -28,5 +25,8 @@
     "url": "https://github.com/lucassantosf/app-node/issues"
   },
   "homepage": "https://github.com/lucassantosf/app-node#readme",
-  "description": ""
+  "description": "",
+  "dependencies": {
+    "babel-core": "^6.26.3"
+  }
 }
