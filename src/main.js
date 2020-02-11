@@ -1,3 +1,5 @@
+import api from './api';
+
 class App{
 
 	constructor(){
@@ -5,7 +7,7 @@ class App{
 
 		this.formEl = document.getElementById('repo-form');
 		this.listEl = document.getElementById('repo-list');
-
+		this.inputEl = document.querySelector('input[name=repository]');
 		this.registerHandlers();
 	} 
 
@@ -13,17 +15,60 @@ class App{
 		this.formEl.onsubmit = event => this.addRepository(event);
 	}
 
-	addRepository(event){
+	async addRepository(event){
 		event.preventDefault();
 
-		this.repositories.push({
-			name:'Rockeseat.com.br',
-			description:'Tire a sua ideia do papel e de vida a sua startup',
-			avatar_url:'https://avatars0.githubusercontent.com/u/28929274?v=4',
-			html_url:'http://github.com/lucassantosf',
-		});
+		const repoInput = this.inputEl.value;
 
-		this.render();
+		if(repoInput.length === 0){
+			return;
+		}
+
+		this.setLoading();
+
+		//Tentar fazer a requisição 
+		try{
+			//Fazendo a requisição da API
+			const response = await api.get(`repos/${repoInput}`);
+
+			//Desestruturação
+			const { name, description, html_url, owner: { avatar_url} }  = response.data;
+
+			//Object short sintax
+			this.repositories.push({
+				name,
+				description,
+				avatar_url,
+				html_url,
+			});
+
+			//Limpar input 
+			this.inputEl.value = '';
+
+			this.render();
+		
+		}catch (err){
+
+			alert('Repositório não existe');
+
+		}
+
+		this.setLoading(false); 
+
+	}
+
+	setLoading(loading = true){
+
+		if(loading === true){
+			let loadingEl = document.createElement('span');
+			loadingEl.appendChild(document.createElement('Carregando'));
+			loadingEl.setAttribute('id','loading');
+
+			this.formEl.appendChild(loadingEl);
+		}else{
+			document.getElementById('loading').remove();
+		}
+
 	}
 
 	render(){
@@ -42,6 +87,7 @@ class App{
 
 			let linkEl = document.createElement('a');
 			linkEl.setAttribute('target','_blank'); 
+			linkEl.setAttribute('href',repo.html_url); 
 			linkEl.appendChild(document.createTextNode('Acessar'));  
 
 			let listItemEl = document.createElement('li');
